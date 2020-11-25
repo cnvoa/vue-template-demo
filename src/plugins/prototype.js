@@ -25,11 +25,3 @@ Vue.prototype.$storage = storage
 // 头部navbar
 import header from "@/components/nav/navbar";
 Vue.component('Nav-header', header)
-
-// 本地开发 打开调试面板
-if (process.env.NODE_ENV === 'development') {
-  localStorage.setItem('vConsole_switch_x', 80)
-
-  const VConsole = require('vconsole');
-  new VConsole();
-}

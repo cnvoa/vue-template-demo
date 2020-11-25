@@ -7,6 +7,8 @@ Vue.config.productionTip = false
 
 // 导入vant
 import '@/plugins/vant'
+// 导入prototype
+import '@/plugins/prototype'
 
 new Vue({
   router,
