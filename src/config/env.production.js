@@ -1,6 +1,6 @@
 // 生产环境
 module.exports = {
-  title: 'vue-template-demo',
+  title: 'vue-template-demo-production',
 
   baseURL: 'https://autumnfishbbbbbbbb.cn/', // 项目地址
   time: 6000, // 请求持续时间

@@ -1,17 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh" data-content-max>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- 使用CDN的CSS文件 本地开发请注释掉-->
+    <!-- <% for (var i in htmlWebpackPlugin.options.cdn &&
+    htmlWebpackPlugin.options.cdn.css) { %>
+    <link rel="stylesheet" href="<%= htmlWebpackPlugin.options.cdn.css[i] %>" />
+    <% } %> -->
   </head>
-  <body>
+  <body data-content-max>
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <!-- 使用CDN的JS文件 本地开发请注释掉-->
+    <!-- <% for (var i in htmlWebpackPlugin.options.cdn &&
+    htmlWebpackPlugin.options.cdn.js) { %>
+    <script type="text/javascript" src="<%= htmlWebpackPlugin.options.cdn.js[i] %>"></script>
+    <% } %> -->
   </body>
+  <!-- 动态dpr -->
+  <!-- <script type="text/javascript">
+    function setDpr() {
+      var docEl = document.documentElement
+        , dpr = window.devicePixelRatio || 1;
+      docEl.setAttribute('data-dpr', dpr);
+    }
+    setDpr()
+    window.onresize = function () {
+      setDpr()
+    }
+  </script> -->
 </html>

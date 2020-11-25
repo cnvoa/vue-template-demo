@@ -1,7 +1,29 @@
 const path = require('path')
 const resolve = dir => path.join(__dirname, dir)
+
 const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
+
 const defaultSettings = require('./src/config/index.js')
+const name = defaultSettings.title || 'vue mobile template'
+
+// CDN外链，会插入到index.html中
+const cdn = {
+  // 开发环境
+  dev: {
+    css: [],
+    js: []
+  },
+  // 生产环境
+  build: {
+    css: [],
+    js: [
+      'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js',
+      'https://cdn.jsdelivr.net/npm/vue-router@3.1.5/dist/vue-router.min.js',
+      'https://cdn.jsdelivr.net/npm/axios@0.19.2/dist/axios.min.js',
+      'https://cdn.jsdelivr.net/npm/vuex@3.1.2/dist/vuex.min.js'
+    ]
+  }
+}
 
 module.exports = {
   productionSourceMap: false,
@@ -49,12 +71,27 @@ module.exports = {
       }
     }
   },
+  configureWebpack: config => {
+    // 为生产环境修改配置...
+    if (IS_PROD) {
+      /**
+       * externals  为引入cdn准备
+       * 决定是否使用cdn时 请注意这里的代码注释 不然打包的时候会报错
+       */
+      config.externals = {
+        vue: 'Vue',
+        'vue-router': 'VueRouter',
+        vuex: 'Vuex',
+        axios: 'axios'
+      }
+    }
+  },
   chainWebpack: config => {
     // 移除 prefetch 插件 html页面
     config.plugins.delete('prefetch')
     // 移除 preload 插件 html页面
     config.plugins.delete('preload')
-    
+
     // 设置快捷路径， @ 表示 'src' ，components 表示 'src/components'
     config.resolve.alias
       // .set('@', resolve('src'))
@@ -63,5 +100,13 @@ module.exports = {
       .set('@views', resolve('src/views'))
       .end();
 
+    // 注入cdn路径 需要在public index.html里面展开
+    config.plugin('html').tap(args => {
+
+      args[0].cdn = cdn.build // 这里只是为html模板展开提供数据，最终打包cdn起效果的还是 config.externals，打包时报错请注意config.externals
+
+      args[0].title = name // 注入html title
+      return args
+    })
   }
 }
