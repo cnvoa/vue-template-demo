@@ -5,6 +5,9 @@ import store from './store'
 
 Vue.config.productionTip = false
 
+// 导入vant
+import '@/plugins/vant'
+
 new Vue({
   router,
   store,
