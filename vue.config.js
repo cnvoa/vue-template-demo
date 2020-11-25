@@ -1,3 +1,6 @@
+const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
+const defaultSettings = require('./src/config/index.js')
+
 module.exports = {
   productionSourceMap: false,
   publicPath: './',
@@ -27,5 +30,9 @@ module.exports = {
       //   }
       // }
     }
-  }
+  },
+  /**
+   * 导入公共scss
+   * 可以在css中拼接 $cdn 图片路径
+   */
 }
