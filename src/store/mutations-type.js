@@ -1,0 +1,9 @@
+const STORAGEPAGE = 'STORAGEPAGE'
+const ASYNC = 'ASYNC'
+const SYNC = 'SYNC'
+
+export {
+  STORAGEPAGE,
+  ASYNC,
+  SYNC
+}
