@@ -1,3 +1,5 @@
+const path = require('path')
+const resolve = dir => path.join(__dirname, dir)
 const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
 const defaultSettings = require('./src/config/index.js')
 
@@ -35,4 +37,26 @@ module.exports = {
    * 导入公共scss
    * 可以在css中拼接 $cdn 图片路径
    */
+  css: {
+    extract: IS_PROD,
+    sourceMap: false,
+    loaderOptions: {
+      scss: {
+        prependData: `
+        @import "@assets/css/index.scss";
+        $cdn: "${defaultSettings.$cdn}";
+        `
+      }
+    }
+  },
+  chainWebpack: config => {
+    // 设置快捷路径， @ 表示 'src' ，components 表示 'src/components'
+    config.resolve.alias
+      // .set('@', resolve('src'))
+      .set('@assets', resolve('src/assets'))
+      .set('@components', resolve('src/components'))
+      .set('@views', resolve('src/views'))
+      .end();
+
+  }
 }
