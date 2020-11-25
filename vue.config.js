@@ -50,6 +50,11 @@ module.exports = {
     }
   },
   chainWebpack: config => {
+    // 移除 prefetch 插件 html页面
+    config.plugins.delete('prefetch')
+    // 移除 preload 插件 html页面
+    config.plugins.delete('preload')
+    
     // 设置快捷路径， @ 表示 'src' ，components 表示 'src/components'
     config.resolve.alias
       // .set('@', resolve('src'))
