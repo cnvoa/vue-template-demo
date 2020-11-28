@@ -3,6 +3,8 @@ const resolve = dir => path.join(__dirname, dir)
 
 const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
 
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+
 const defaultSettings = require('./src/config/index.js')
 const name = defaultSettings.title || 'vue mobile template'
 
@@ -14,7 +16,7 @@ const cdn = {
     js: []
   },
   // 生产环境
-  build: {
+  build: { 
     css: [],
     js: [
       'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js',
@@ -108,5 +110,14 @@ module.exports = {
       args[0].title = name // 注入html title
       return args
     })
+
+    if (IS_PROD) {
+      // 打包分析
+      config.plugin("webpack-report").use(BundleAnalyzerPlugin, [
+        {
+          analyzerMode: "static"
+        }
+      ]);
+    }
   }
 }
