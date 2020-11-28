@@ -8,7 +8,7 @@
 `Vue CLI` 需要 Node.js 8.9 或更高版本 (推荐 8.11.0+)。你可以使用 [nvm](https://github.com/nvm-sh/nvm) 或
 [nvm-windows](https://github.com/coreybutler/nvm-windows) 或 [n](https://github.com/tj/n) 在同一台电脑中管理多个 Node 版本。
 
-本示例 Node.js 14.15.0
+本示例基于 Node.js 14.15.0
 
 ### 启动项目
 
@@ -56,7 +56,7 @@ npm run serve
 
 ```javascript
 "scripts": {
-  "serve": "vue-cli-service serve --open",
+  "serve": "vue-cli-service serve",
   "staging": "vue-cli-service build --mode staging",
   "build": "vue-cli-service build",
 }
@@ -70,7 +70,7 @@ npm run serve
 
 在项目根目录中新建`.env.*`
 
-- .env.development 本地开发环境配置
+- .env.development 本地开发环境配置 (缩写.env)
 
 ```bash
 NODE_ENV='development'
@@ -135,8 +135,6 @@ console.log(baseApi)
 
 ### <span id="rem">✅ rem 适配方案 </span>
 
-不用担心，项目已经配置好了 `rem` 适配, 下面仅做介绍：
-
 Vant 中的样式默认使用`px`作为单位，如果需要使用`rem`单位，推荐使用以下两个工具:
 
 - [postcss-pxtorem](https://github.com/cuth/postcss-pxtorem) 是一款 `postcss` 插件，用于将单位转化为 `rem`
@@ -161,14 +159,18 @@ module.exports = {
 }
 ```
 
-更多详细信息： [vant](https://youzan.github.io/vant/#/zh-CN/quickstart#jin-jie-yong-fa)
+更多详细信息： [vant](https://youzan.github.io/vant/#/zh-CN/advanced-usage) , [vant-zh](https://vant-contrib.gitee.io/vant/#/zh-CN/advanced-usage)
 
 **新手必看，老鸟跳过**
 
-很多小伙伴会问我，适配的问题,因为我们使用的是 Vant UI，所以必须根据 Vant UI 375 的设计规范走。使用`postcss-pxtorem`，并将`rootValue`设置成`37.5`就是为了将Vant UI的px尺寸转成rem尺寸。
+很多小伙伴会问我，适配的问题。因为我们使用的是 Vant UI，所以必须根据 Vant UI 375 的设计规范走。
+- 要么我们的设计图也是用375px的宽度
+- 要么设计图用750px的宽度 使用工具转换成375px的宽度(比如**蓝湖**，**sass**)
+
+使用`postcss-pxtorem`，并将`rootValue`设置成`37.5`就是为了将Vant UI的px尺寸转成rem尺寸。
 
 那如果我们自己的设计给出的图是750px宽度的呢？
-- 我们可以将`750px`宽度的设计图上传到蓝湖，通过蓝湖的换算功能得到`375px`宽度的尺寸。
+- 我们可以将`750px`宽度的设计图上传到蓝湖，通过蓝湖的换算功能得到`375px`宽度的尺寸。使用`postcss-pxtorem`，换算项目里面所有的px，得到rem。
 - 在sass中定义一个方法，接收一个`px`尺寸，然会返回一个`rem`单位的尺寸，在vw-layout.scss文件中已经定义了一个`px2rem`方法，调用如下
 ```css
 h2{
@@ -178,9 +180,14 @@ h2{
   color: #666;
 }
 ```
-这里`font-size`通过sass的方法就被转换成了rem的单位尺寸
+上面`font-size`通过sass的方法就被转换成了rem的单位尺寸，这个方法里面第一步就把750px宽度的尺寸转换成和vant UI同比例的尺寸然后直接转换成rem。
 
-下面就大搞普及一下 rem。
+这里sass方法`px2rem`把px直接转换成了rem，**postcss-pxtorem**插件就不能转换使用了`px2rem`方法的css，解决方案是在**PostCSS 配置**里面屏蔽src目录。
+
+如果采用了**sass** `px2rem` 方法，就相当于 `postcss-pxtorem`插件只转换vant UI，其余项目的css使用了sass转换，最后得到的结果都是一样的。
+当然你也可以在`px2rem` 方法中只计算px尺寸，rem转换全丢给`postcss-pxtorem`插件
+
+**下面就大搞普及一下 rem**。
 
 我们知道 `1rem` 等于`html` 根元素设定的 `font-size` 的 `px` 值。Vant UI 设置 `rootValue: 37.5`,你可以看到在 iPhone 6 下
 看到 （`1rem 等于 37.5px`）：
@@ -315,14 +322,14 @@ const plugins = [
   ]
 ]
 module.exports = {
-  presets: [['@vue/cli-plugin-babel/preset', { useBuiltIns: 'usage', corejs: 3 }]],
+  presets: ['@vue/cli-plugin-babel/preset'],
   plugins
 }
 ```
 
 #### 使用组件
 
-项目在 `src/plugins/vant.js` 下统一管理组件全局引入，用哪个引入哪个，无需在页面里重复引用
+项目在 `src/plugins/vant.js` 下统一管理组件全局引入，用哪个引入哪个，无需在页面里重复引用，`多次重复`使用的组件可以在这里引入。使用`较少`的组件可以在具体的文件中引入
 
 ```javascript
 // 按需全局引入 vant组件
@@ -338,7 +345,11 @@ Vue.use(Tabbar).use(TabbarItem)
 
 ### <span id="sass">✅ Sass 全局样式</span>
 
-首先 你可能会遇到 `node-sass` 安装不成功，别放弃多试几次！！！
+首先 你可能会遇到 `node-sass` 安装不成功，别放弃多试几次！！！。
+
+本项目放弃了 `node-sass` ，使用了最新的 `dart-sass` 。`sass`官方未来也主要支持 `dart-sass`。
+
+`值得注意`的是你如果做的是大型项目，现阶段 `dart-sass` 编译可能比`node-sass`慢。
 
 每个页面自己对应的样式都写在自己的 .vue 文件之中 `scoped` 它顾名思义给 css 加了一个域的概念。
 
@@ -384,6 +395,8 @@ vue-template-demo 所有全局样式都在 `@/src/assets/css` 目录下设置
 
 当子组件使用了 `scoped` 但在父组件又想修改子组件的样式可以 通过 `>>>` 或者`/deep/`来实现：
 
+当然在 `dart-sass` 中 `>>>` 或者 `/deep/` 变更成了统一的 `::v-deep`
+
 ```css
 <style scoped>
 
@@ -391,6 +404,12 @@ vue-template-demo 所有全局样式都在 `@/src/assets/css` 目录下设置
 
 .red{
   /deep/ i{
+    color: red;
+  }
+}
+
+.red{
+  ::v-deep i{
     color: red;
   }
 }
@@ -438,7 +457,7 @@ import { $cdn } from '@/config'
 Vue.prototype.$cdn = $cdn
 ```
 
-在 css 和 js 使用
+在 css 和 js 使用 `$cdn`
 
 ```html
 <script>
@@ -571,10 +590,10 @@ export default createRouter()
 
 ### <span id="axios">✅ Axios 封装及接口管理</span>
 
-`http/request.js` 封装 axios ,开发者需要根据后台接口做修改。
+`http/request.js` 封装 axios ,开发者需要根据后台接口的状态码做出对应的反馈。
 
 - `service.interceptors.request.use` 里可以设置请求头，比如设置 `token`
-- `config.hideloading` 是在 api 文件夹下的接口参数里设置，下文会讲
+- `config.loading` 是在 api 文件夹下的api.js接口参数里设置
 - `service.interceptors.response.use` 里可以对接口返回数据处理，比如 401 删除本地信息，重新登录
 
 axios 封装特色
@@ -587,11 +606,11 @@ axios 封装特色
 
 在`http/api` 文件夹下统一管理接口
 
-- `url` 接口地址，请求的时候会拼接上 `config` 下的 `baseApi`
+- `url` 接口地址，请求的时候会拼接上 `config` 下的 `baseURL`
 - `method` 请求方法是 `get` 请求参数请传递 `params`
 - `method` 请求方法是 `post` 请求参数请传递 `data`
 - `data` 请求参数 `qs.stringify(params)` 是对数据系列化操作
-- `message` 默认没有此字段，则不显示 loading ui 交互中有些接口不需要让用户感知。有此字段则显示请求loading
+- `loading` 默认没有此字段，不显示接口请求动画， 交互中有些接口不需要让用户感知。有此字段则显示请求loading
 
 ```javascript
 import qs from 'qs'
@@ -732,11 +751,12 @@ module.exports = {
 使用 例如: `src/http/api.js`
 
 ```javascript
-export function getUserInfo(params) {
-  return request({
-    url: 'api/dujitang',
-    method: 'post',
-    data: qs.stringify(params)
+const trahs = (params) => {
+  return apiAxios({
+    method: 'get',
+    url: "api/lajifl",
+    params,
+    loading: '查询中'
   })
 }
 ```

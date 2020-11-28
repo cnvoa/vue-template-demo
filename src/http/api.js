@@ -21,7 +21,7 @@ const trahs = (params) => {
     method: 'get',
     url: "api/lajifl",
     params,
-    message: '查询中'
+    loading: '查询中'
   })
 }
 const slang = () => {

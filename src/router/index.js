@@ -34,7 +34,7 @@ const routes = [
   , {
     path: '/vuex',
     name: 'vuex',
-    component: (resolve) => require(['@/views/home/vuex/vuex.vue'], resolve),
+    component: () => import('@/views/home/vuex/vuex.vue'),
     meta: { title: "vuex", depth: 1, showFooter: false, showHeader: true, showHeaderBack: true, login: false }
   }
 ]

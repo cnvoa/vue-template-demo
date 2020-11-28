@@ -2,7 +2,7 @@
  * @Author: mentals@foxmail.com 
  * @Date: 2020-11-06 18:23:08 
  * @Last Modified by: mentals@foxmail.com
- * @Last Modified time: 2020-11-24 15:39:43
+ * @Last Modified time: 2020-11-28 18:49:00
  * @descrip: axios统一封装
  */
 
@@ -74,9 +74,9 @@ axios.interceptors.request.use(
     stopRepeatRequest(reqList, config, cancel, '重复请求')
 
     // 是否显示loading 和提示词
-    if (config.message) {
+    if (config.loading) {
       Toast.loading({
-        message: config.message || '加载中...',
+        message: config.loading || '加载中...',
         forbidClick: true,
         loadingType: 'spinner',
         duration: 0
