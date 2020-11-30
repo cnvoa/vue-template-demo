@@ -1,5 +1,5 @@
 # vue-template-demo
-<div align="center"><img src="https://s3.ax1x.com/2020/11/19/DuKPSI.gif" /></div>
+<div align="center"><img src="https://s3.ax1x.com/2020/11/19/DuKPSI.gif" width="100" /></div>
 
 基于 vue-cli4.0 + webpack 5 + vant ui + sass+ rem 适配方案+axios 封装，构建手机端模板脚手架
 
@@ -25,11 +25,11 @@ npm run serve
 
 <span id="top">目录</span>
 
-- √ Vue-cli4
+
 - [√ 配置多环境变量](#env)
 - [√ rem 适配方案](#rem)
-- [√ vm 适配方案](#vm)
-- [√ vm-rem 适配方案](#vm-rem)
+- [√ vw 适配方案](#vw)
+- [√ vw-rem 适配方案](#vw-rem)
 - [√ VantUI 组件按需加载](#vant)
 - [√ Sass 全局样式](#sass)
 - [√ Vuex 状态管理](#vuex)
@@ -277,7 +277,7 @@ package.json 删除如下代码
 
 [▲ 回顶部](#top)
 
-### <span id="vm-rem">✅ vm-rem 适配方案 </span>
+### <span id="vw-rem">✅ vm-rem 适配方案 </span>
 本项目采用这种方案，并且也推荐这种方案，vm-rem布局结合了vm布局和rem布局的优点，无任何额外依赖，只需要rem转换插件，无vw适配方案的缺点。
 
 #### 1.设置html的font-size
@@ -1039,7 +1039,7 @@ VScode （版本 1.47.3）安装 `eslint` `prettier` `vetur` 插件 `.vue` 文�
 
 在文件 `.eslintrc.js` 里简单配置eslint规则
 
-在vs code中有插件配合 `pettier` `Eslint`进行代码格式化检查。这里不在赘述，请google
+在vs code中有插件配合 `pettier` `Eslint`进行代码格式化检查。这里不在赘述，也没有配置，请google和百度。
 
 [▲ 回顶部](#top)
 

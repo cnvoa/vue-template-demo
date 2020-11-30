@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "This is a Vue.js demo project",
   "private": true,
-  "author": "zhuo_xiang <mentals@foxmail.com>",
+  "author": "mentals@foxmail.com",
   "repository": {
     "type": "git",
     "url": "https://github.com/cnvoa/vue-template-demo.git"

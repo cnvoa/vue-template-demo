@@ -1,3 +1,4 @@
+'use strict'
 const path = require('path')
 const resolve = dir => path.join(__dirname, dir)
 
@@ -30,7 +31,8 @@ const cdn = {
 module.exports = {
   productionSourceMap: false,
   publicPath: './',
-  assetsDir: "static",
+  assetsDir: "static", //  outputDir的静态资源(js、css、img、fonts)目录
+  lintOnSave: true, //是否在保存的时候使用 `eslint-loader` 进行检查。
   devServer: {
     open: true,  // npm run serve后自动打开页面
     port: 9527, // 开发服务器运行端口号
@@ -43,7 +45,7 @@ module.exports = {
     proxy: {
       '/apis': {
         target: 'https://api.muxiaoguo.cn',
-        changeOrigin: true, // 支持跨域
+        changeOrigin: true, // 支持跨域 是否修改请求头中的host
         pathRewrite: {
           '^/apis': ''
         }
@@ -93,6 +95,9 @@ module.exports = {
     config.plugins.delete('prefetch')
     // 移除 preload 插件 html页面
     config.plugins.delete('preload')
+
+    // https://webpack.js.org/configuration/devtool/#development
+    config.when(!IS_PROD, config => config.devtool('cheap-source-map'))
 
     // 设置快捷路径， @ 表示 'src' ，components 表示 'src/components'
     config.resolve.alias
