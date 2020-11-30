@@ -1,7 +1,7 @@
 # vue-template-demo
 <div align="center"><img src="https://s3.ax1x.com/2020/11/19/DuKPSI.gif" width="100" /></div>
 
-基于 vue-cli4.0 + webpack 5 + vant ui + sass+ rem 适配方案+axios 封装，构建手机端模板脚手架
+基于 vue-cli4.0 + webpack 4 + vant ui + sass+ rem 适配方案+axios 封装，构建手机端模板脚手架
 
 ### Node 版本要求
 
