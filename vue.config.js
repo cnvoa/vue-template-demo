@@ -126,8 +126,8 @@ module.exports = {
             // 将 runtime 作为内联引入不单独存在
             inline: /runtime\..*\.js$/
           }
-        ])
-        .end()
+        ]).end()
+
       config.optimization.splitChunks({
         chunks: 'all',
         cacheGroups: {
@@ -154,6 +154,20 @@ module.exports = {
       })
       config.optimization.runtimeChunk('single')
     })
+
+    // 压缩图片
+    config.module
+      .rule("images")
+      .test(/\.(gif|png|jpe?g|svg)$/i)
+      .use("image-webpack-loader")
+      .loader("image-webpack-loader")
+      .options({
+        mozjpeg: { progressive: true, quality: 65 },
+        optipng: { enabled: false },
+        pngquant: { quality: [0.65, 0.9], speed: 4 },
+        gifsicle: { interlaced: false }
+        // webp: { quality: 75 } // 支不支持webp
+      });
 
     if (IS_PROD) {
       // 打包分析
