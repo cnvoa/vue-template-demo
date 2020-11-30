@@ -32,7 +32,7 @@ export default {
         }
         ,{
           title: 'VantUI 组件按需加载',
-          message: '只加载需要的组件, 修改配色',
+          message: '只加载需要的组件, 修改css属性',
         }
         ,{
           title: 'Sass 全局样式',
@@ -78,7 +78,7 @@ export default {
         }
         ,{
           title: '压缩图片',
-          message: '',
+          message: '可能会遇到常见的两个问题，请注意查看README',
         }
         ,{
           title: 'splitChunks 单独打包第三方模块',

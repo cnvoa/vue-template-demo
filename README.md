@@ -913,11 +913,13 @@ module.exports = {
 
 ### <span id="compress">✅ 压缩图片 </span>
 
+注意使用`npm`安装安装 `image-webpack-loader` 的时候可能**安装不完整**，依赖缺失。请先卸载 `image-webpack-loader` ，然后使用 `cnpm` 试试
+
 注意在某些mac或者linux上 `image-webpack-loader`会引起报错
 
-解决办法安装libpng库,在github issue https://github.com/tcoopman/image-webpack-loader/issues/49可查看
+解决办法安装 `libpng` 库,在github issue https://github.com/tcoopman/image-webpack-loader/issues/49可查看
 
-安装代码
+`libpng` 安装代码
 mac:
 ```shell
 brew install libpng
