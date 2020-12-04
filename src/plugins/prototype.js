@@ -4,14 +4,6 @@ import Vue from 'vue'
 import { $cdn } from "@/config/index";
 Vue.prototype.$cdn = $cdn
 
-/* 挂载axios */
-// import http from '@/http/http';
-// Vue.prototype.$http = http
-
-// 挂载封装好的请求接口
-// import request from '@/http/request'
-// Vue.prototype.$request = request
-
 // storage
 import storage from "t-storage";
 Vue.prototype.$storage = storage

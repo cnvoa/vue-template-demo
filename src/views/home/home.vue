@@ -39,7 +39,7 @@ export default {
           message: 'sass配置，sass全局混入',
         }
         ,{
-          title: 'Vuex 状态管理',
+          title: 'Vuex 状态管理和转场动画',
           message: 'vuex 状态管理缓存常用用法',
           jump: '/vuex'
         }

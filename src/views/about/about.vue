@@ -13,9 +13,8 @@
         <p>加入微信群, 群里的大佬都在等你</p>
       </div>
       <div class="qrcode" v-if="!disabled">
-        如果上面的群二维码失效了, 就
+        如果上面的群二维码失效了, 
         <van-button size="small" type="warning" :disabled="disabled" @click.native.once="showAuthor">点我</van-button>
-        吧
       </div>
       <div class="author" v-if="disabled"></div>
     </div>

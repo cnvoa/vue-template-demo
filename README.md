@@ -1,7 +1,7 @@
 # vue-template-demo
 <div align="center"><img src="https://s3.ax1x.com/2020/11/19/DuKPSI.gif" width="100" /></div>
 
-基于 vue-cli4.0 + webpack 4 + vant ui + sass+ rem 适配方案+axios 封装，构建手机端模板脚手架
+基于 vue-cli4.0 + webpack 4 + vant ui + sass + rem+vw 适配方案+axios 封装，构建手机端模板脚手架
 
 ### Node 版本要求
 
@@ -35,6 +35,7 @@ npm run serve
 - [√ Vuex 状态管理](#vuex)
 - [√ Vue-router](#router)
 - [√ Axios 封装及接口管理](#axios)
+- [√ 转场动画](#animate)
 - [√ Webpack 4 vue.config.js 基础配置](#base)
 - [√ 配置 alias 别名](#alias)
 - [√ 配置 proxy 跨域](#proxy)
@@ -584,6 +585,8 @@ const createRouter = () =>
 export default createRouter()
 ```
 
+其中 `/about` 路由中使用了不同的打包方式
+
 更多:[Vue Router](https://router.vuejs.org/zh/)
 
 [▲ 回顶部](#top)
@@ -652,6 +655,62 @@ trahs({
 }).then(() => {
   // console.log(res);
 })
+```
+
+[▲ 回顶部](#top)
+
+### <span id="animate">✅ 转场动画 </span>
+
+模仿微信的转场动画，根据定义的层级不同来实现
+
+```javascript
+// router/index.js
+export const router = [
+  {
+    path: '/home',
+    name: 'home',
+    component: () => import('@/views/home/home.vue'), // 路由懒加载
+    meta: { 
+      title: "首页", 
+      depth: 0, // 页面深度 转场动画使用
+      showFooter: true,  
+      showHeader: false, 
+      showHeaderBack: false, 
+      login: false 
+    }
+  }
+]
+```
+```vue
+// App.vue
+<template>
+  <div id="app">
+    <transition :name="transitionName">
+      <keep-alive :include="keepAlive">
+        <router-view class="child-view" />
+      </keep-alive>
+    </transition>
+    <tabbar></tabbar>
+  </div>
+</template>
+
+<script>
+// 监听什么得深度 动态切换动画类名
+watch: {
+  $route(to, from){
+    let toDepth = to.meta.depth
+      , fromDepth = from.meta.depth;
+
+    if (toDepth > fromDepth) {
+      this.transitionName = "slide-left";
+    }else if (toDepth < fromDepth) {
+      this.transitionName = "slide-right";
+    }else{
+      this.transitionName = "slide-fade"
+    }
+  }
+}
+</script>
 ```
 
 [▲ 回顶部](#top)
@@ -1037,7 +1096,7 @@ module.exports = {
 
 ### <span id="pettier">✅ Eslint + Pettier 统一开发规范 </span>
 
-VScode （版本 1.47.3）安装 `eslint` `prettier` `vetur` 插件 `.vue` 文件使用 vetur 进行格式化，其他使用`prettier`,
+VScode （版本 1.51.1）安装 `eslint` `prettier` `vetur` 插件 `.vue` 文件使用 vetur 进行格式化，其他使用`prettier`,
 
 在文件 `.eslintrc.js` 里简单配置eslint规则
 
