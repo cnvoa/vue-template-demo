@@ -82,12 +82,12 @@ module.exports = {
        * externals  为引入cdn准备
        * 决定是否使用cdn时 请注意这里的代码注释 不然打包的时候会报错
        */
-      config.externals = {
-        vue: 'Vue',
-        'vue-router': 'VueRouter',
-        vuex: 'Vuex',
-        axios: 'axios'
-      }
+      // config.externals = {
+      //   vue: 'Vue',
+      //   'vue-router': 'VueRouter',
+      //   vuex: 'Vuex',
+      //   axios: 'axios'
+      // }
     }
   },
   chainWebpack: config => {

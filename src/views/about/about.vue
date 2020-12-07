@@ -9,7 +9,8 @@
         <p>如果您觉得模板对您有用的话, 就点个小星星吧</p>
       </div>
       <div class="wxchat-group">
-        <img src="@assets/image/group.jpg" alt="">
+        <!-- <img src="@assets/image/group.jpg" alt=""> -->
+        <img src="http://test2.huiche51.com/githubimg/group.jpg" alt="">
         <p>加入微信群, 群里的大佬都在等你</p>
       </div>
       <div class="qrcode" v-if="!disabled">
