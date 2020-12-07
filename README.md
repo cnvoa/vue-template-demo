@@ -3,9 +3,11 @@
 
 基于 vue-cli4.0 + webpack 4 + vant ui + sass + rem+vw 适配方案+axios 封装，构建手机端模板脚手架
 
-csdn: [vue-cli-4 移动端脚手架模板vue-template-demo](https://blog.csdn.net/joy1793/article/details/110798660)
+<!-- csdn: [vue-cli-4 移动端脚手架模板vue-template-demo](https://blog.csdn.net/joy1793/article/details/110798660) -->
+csdn: <a href="https://blog.csdn.net/joy1793/article/details/110798660" target="_blank">vue-cli-4 移动端脚手架模板vue-template-demo</a>
 
-查看 [demo](http://test2.huiche51.com/test/vuecli4) 建议手机端查看
+<!-- 查看 [demo](http://test2.huiche51.com/test/vuecli4) 建议手机端查看 -->
+查看 <a href="http://test2.huiche51.com/test/vuecli4" target="_blank">demo 建议手机端查看</a>
 
 ### Node 版本要求
 
