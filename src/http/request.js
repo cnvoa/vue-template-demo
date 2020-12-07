@@ -2,7 +2,7 @@
  * @Author: mentals@foxmail.com 
  * @Date: 2020-11-06 18:23:08 
  * @Last Modified by: mentals@foxmail.com
- * @Last Modified time: 2020-11-28 18:49:00
+ * @Last Modified time: 2020-12-07 17:12:07
  * @descrip: axios统一封装
  */
 
@@ -150,7 +150,7 @@ axios.interceptors.response.use(
  */
 export function apiAxios(options) {
   let obj = {
-    headers: { 'token': '123' },
+    // headers: { 'token': '123' },
     baseURL: baseURL
   }
 
