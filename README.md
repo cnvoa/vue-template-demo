@@ -1115,7 +1115,7 @@ VScode （版本 1.51.1）安装 `eslint` `prettier` `vetur` 插件 `.vue` 文�
 扫描添加下方的微信并备注 github 加交流群，交流学习，及时获取代码最新动态。
 
 <p>
-  <img src="./src/assets/image/group.jpg" width="256" style="display:inline;">
+  <img src="http://test2.huiche51.com/githubimg/group.jpg" width="256" style="display:inline;">
   <img src="./src/assets/image/mentals.jpg" width="256" style="display:block;">
 </p>
  
