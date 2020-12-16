@@ -29,6 +29,35 @@ npm install
 npm run serve
 ```
 
+### 注意
+
+打包时若出现以下报错
+
+```shell
+⠙  Building for production...
+
+ ERROR  Failed to compile with 2 errors                                                                                                                                                                                   下午2:50:23
+
+ error  in ./src/assets/icons/download.svg
+
+Module build failed (from ./node_modules/image-webpack-loader/index.js):
+Error: Cannot find module 'imagemin-gifsicle'
+Require stack:
+- /Users/mac/project/debug/vue-template-demo/node_modules/image-webpack-loader/index.js
+```
+原因是npm安装 `image-webpack-loader` 插件时，安装不完整，缺失依赖。
+
+你需要先卸载 `image-webpack-loader`
+```shell
+npm uninstall image-webpack-loader
+or
+cnpm uninstall image-webpack-loader
+```
+然后通过cnpm安装 `image-webpack-loader`
+```shell
+cnpm i image-webpack-loader -D
+```
+
 <span id="top">目录</span>
 
 
