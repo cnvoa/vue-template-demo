@@ -1,13 +1,15 @@
 <template>
-  <van-tabbar v-model="active" route border v-if="visible">
-    <van-tabbar-item replace v-for="(item, index) in list" :key="index" 
-    :icon="item.icon" :to="item.link">
+  <van-tabbar v-model="active" border v-if="visible" 
+  inactive-color="#000" active-color="#ee0a24" @change="onChange">
+    <van-tabbar-item v-for="(item, index) in list" :key="index" 
+    :icon="item.icon">
       {{item.title}}
     </van-tabbar-item>
   </van-tabbar>
 </template>
 
 <script>
+import { serverPath, linkURL } from "@/config/index";
 export default {
   components: {},
   data() {
@@ -15,7 +17,7 @@ export default {
       list: [
         {
           title: '首页',
-          link: '/home',
+          link: '/',
           icon: 'home-o'
         }
         ,{
@@ -26,6 +28,7 @@ export default {
         ,{
           title: '关于',
           link: '/about',
+          __target: linkURL + serverPath + '/about/',
           icon: 'good-job-o'
         }
       ],
@@ -33,6 +36,19 @@ export default {
     };
   },
   methods: {
+    /**
+     * 有__target用window跳转
+     * 无则使用vue-router路由
+     */
+    onChange(e){
+      const {link, __target} = this.list[e];
+
+      if (process.env.NODE_ENV == "production" && __target) {
+        window.location.replace(__target)
+      }else{
+        this.$router.replace(link)
+      }
+    }
   },
   created() {},
   computed: {
@@ -41,7 +57,25 @@ export default {
     }
   },
   mounted(){},
-  watch: {}
+  watch: {
+    // 守护tabbar选中的颜色
+    $route(n){
+      switch (n.name) {
+        case "home":
+          this.active = 0
+          break;
+        case "category":
+          this.active = 1
+          break;
+        case "about":
+          this.active = 2
+          break;
+      
+        default:
+          break;
+      }
+    }
+  }
 };
 </script>
 
