@@ -4,7 +4,7 @@ module.exports = {
   title: 'vue-template-demo-production',
 
   baseURL: 'https://api.muxiaoguo.cn/', // 项目地址
-  linkURL: 'http://test2.huiche51.com/', // 访问地址
+  linkURL: 'http://test2.huiche51.com', // 访问地址 不要 /
   time: 6000, // 请求持续时间
   retry: 2, // 请求次数
   retryDelay: 1000, // 请求间隙

@@ -1,8 +1,10 @@
 import Vue from 'vue'
 
 // 公共cdn地址 供js调用
-import { $cdn } from "@/config/index";
+// 部署路径供预渲染调用
+import { $cdn, serverPath, linkURL } from "@/config/index";
 Vue.prototype.$cdn = $cdn
+Vue.prototype.$linkURL = serverPath ? linkURL + "/" + serverPath : linkURL
 
 // storage
 import storage from "t-storage";

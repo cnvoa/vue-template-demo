@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { serverPath, linkURL } from "@/config/index";
+
 export default {
   components: {},
   data() {
@@ -28,7 +28,7 @@ export default {
         ,{
           title: '关于',
           link: '/about',
-          __target: linkURL + serverPath + '/about/',
+          __target: '/about/',
           icon: 'good-job-o'
         }
       ],
@@ -44,7 +44,7 @@ export default {
       const {link, __target} = this.list[e];
 
       if (process.env.NODE_ENV == "production" && __target) {
-        window.location.replace(__target)
+        window.location.replace(this.$linkURL + __target)
       }else{
         this.$router.replace(link)
       }

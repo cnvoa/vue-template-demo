@@ -9,6 +9,11 @@ csdn: <a href="https://blog.csdn.net/joy1793/article/details/110798660" target="
 <!-- 查看 [demo](http://test2.huiche51.com/test/vuecli4) 建议手机端查看 -->
 查看 <a href="http://test2.huiche51.com/test/vuecli4" target="_blank">demo 建议手机端查看</a>
 
+### 此 `beforehand` 分支使用 `prerender-spa-plugin` 实现了预渲染功能
+快速查看改动
+- [√ seo 预渲染](#prerend)
+- csdn: <a href="https://blog.csdn.net/joy1793/article/details/110798660" target="_blank">vue-cli-4 移动端脚手架模板vue-template-demo</a>
+
 ### Node 版本要求
 
 `Vue CLI` 需要 Node.js 8.9 或更高版本 (推荐 8.11.0+)。你可以使用 [nvm](https://github.com/nvm-sh/nvm) 或
@@ -81,6 +86,7 @@ cnpm i image-webpack-loader -D
 - [√ splitChunks 单独打包第三方模块](#chunks)
 - [√ 添加 IE 兼容 ](#ie)
 - [√ Eslint+Pettier 统一开发规范 ](#pettier)
+- [√ seo 预渲染](#prerend)
 
 ### <span id="env">✅ 配置多环境变量 </span>
 
@@ -1136,6 +1142,117 @@ VScode （版本 1.51.1）安装 `eslint` `prettier` `vetur` 插件 `.vue` 文�
 在文件 `.eslintrc.js` 里简单配置eslint规则
 
 在vs code中有插件配合 `pettier` `Eslint`进行代码格式化检查。这里不在赘述，也没有配置，请google和百度。
+
+[▲ 回顶部](#top)
+
+### <span id="prerend">✅ seo预渲染</span>
+
+如果你需要改善少数页面的seo，或者加快少数页面的打开时间。预渲染是个不错的选择。
+
+预渲染相对于服务端 ssr `开发成本` 更低，代码 `侵入性` 更低。 
+
+预渲染插件 `prerender-spa-plugin` 原理
+
+在 `npm run build` 将代码打包成功以后，`prerender-spa-plugin` 插件会在指定目录开启一个服务，使用google开发的无头浏览器  `puppeteer` 模拟打开打包好的项目，爬取指定的预渲染页面，生成html文件。此时我们访问生成好的html页面就如同访问静态页面一样。
+
+1 安装 `prerender-spa-plugin` 
+```bash
+npm i prerender-spa-plugin -D
+or
+cnpm i prerender-spa-plugin -D
+```
+`prerender-spa-plugin` 依赖 `puppeteer` 浏览器，`puppeteer`较大，若npm安装卡住不动，可先卸载掉 `prerender-spa-plugin`，使用cnpm重新安装
+
+2 配置 `prerender-spa-plugin`
+```js
+// vue.config.js
+// 修改资源打包路径
+module.exports = {
+  productionSourceMap: false,
+  publicPath: '/vue/', //资源拼接路径
+  outputDir: "dist/vue/", // 打包后输出文件的目录
+  assetsDir: "static", //  outputDir的静态资源(js、css、img、fonts)目录
+
+  lintOnSave: true, //是否在保存的时候使用 `eslint-loader` 进行检查。
+}
+```
+
+```js
+// vue.config.js
+// prerender-spa-plugin 插件配置
+configureWebpack: config => {
+  if (IS_PROD) {
+    const PrerenderSPAPlugin = require('prerender-spa-plugin')
+    const Renderer = PrerenderSPAPlugin.PuppeteerRenderer;
+
+    return {
+      plugins: [
+        new PrerenderSPAPlugin({
+          staticDir: path.join(__dirname, 'dist'), // 读取vue-cli已打包文件的根目录 prerender-spa-plugin会在这里开启一个服务
+          outputDir: path.join(__dirname, '/dist/vue/'), //经过prerender-spa-plugin处理的文件最终保存的地方
+          indexPath: path.join(__dirname, 'dist/vue/index.html'), // 指定入口html
+          routes: ['/', '/about'], // 哪些路由页面需要预渲染
+          minify: {
+            minifyCSS: true, // css压缩
+            removeComments: true // 移除注释
+          },
+          renderer: new Renderer({
+            inject: {
+              foo: 'bar'
+            },
+            headless: false,
+            renderAfterDocumentEvent: 'render-event',
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
+          })
+        })
+      ]
+    }
+  }
+}
+```
+
+以上配置在 `npm run build` 后会打包到 **dist/vue/** 目录下，所有的静态资源会拼接上 **/vue/** 二级目录。`prerender-spa-plugin` 插件会读取 **dist** 目录，经过 `prerender-spa-plugin` 插件处理的文件也会覆盖放到 **dist/vue/** 目录下。
+
+以上配置假定会部署到域名的根目录下。在部署时，直接将 **dist** 文件夹下的 **vue** 文件夹放到服务器的根目录下，通过 [http://www.xxxxx.com/vue/](http://www.xxxxx.com/vue/) 即可访问。
+
+3 抽离打包需要的文件目录
+上面配置的打包目录中，`dist/vue/` 已被写死，可以把除域名根路径外的路径写成配置文件。
+- config文件夹下production和staging两种环境中新增 `linkURL`部署域名 `serverPath`多级路径
+- prototype.js中，拼接路径，供页面跳转使用
+- vue.config.js中 修改build打包路径，修改 `prerender-spa-plugin` 插件生成文件路径
+```js
+publicPath: process.env.NODE_ENV == "production" ? "/" + defaultSettings.serverPath : "./", //资源拼接路径  需要判断环境
+  outputDir: process.env.NODE_ENV == "production" ? "dist/" + defaultSettings.serverPath : "dist", // 打包后输出文件的目录
+```
+```js
+new PrerenderSPAPlugin({
+  staticDir: path.join(__dirname, 'dist'), // 读取vue-cli已打包文件的根目录 prerender-spa-plugin会在这里开启一个服务
+  outputDir: path.join(__dirname, '/dist/', defaultSettings.serverPath), //经过prerender-spa-plugin处理的文件最终保存的地方
+  indexPath: path.join(__dirname, 'dist/', defaultSettings.serverPath, '/index.html'), // 指定入口html
+  routes: ['/', '/about'], // 哪些路由页面需要预渲染
+})
+```
+
+以上配置完成后 可随时修改 `serverPath`多级路径，部署在域名根目录和多级目录都可以。
+
+如果需要部署在根目录，则 `serverPath` 置为空。打包完成后，将 `dist`文件夹下所有文件放置在服务器域名根目录下即可
+
+如果需要部署在多级目录，如[http://www.xxxxx.com/aaa/bbb/ccc](http://www.xxxxx.com/aaa/bbb/ccc)， 则 `serverPath` 置为 `aaa/bbb/ccc` 即可。打包完成后，将 `dist`文件夹下 `aa` 文件夹放置在服务器域名根目录下即可
+
+本项目production环境打包后，需放在二级目录访问，[http://www.xxxxx.com/vue/](http://www.xxxxx.com/vue/)
+
+本项目staging环境打包后，需放在根目录访问，[http://www.xxxxx.com](http://www.xxxxx.com)
+
+beforehand分支预渲染功能相对于主分支纯前端渲染，以下文件发生修改
+- package.json
+- src/components/nav/tabbar.vue
+- src/config/env.production.js
+- src/config/env.staging.js
+- src/main.js
+- src/router/index.js
+- vue.config.js
+- src/plugins/prototype.js
+
 
 [▲ 回顶部](#top)
 
