@@ -9,9 +9,9 @@ VueRouter.prototype.push = function push(location) {
 };
 
 const routes = [
-  { path: '*', redirect: "/home" }
+  { path: '*', redirect: "/" }
   , {
-    path: '/home',
+    path: '/',
     name: 'home',
     component: () => import('@/views/home/home.vue'),
     meta: { title: "首页", depth: 0, showFooter: true, showHeader: false, showHeaderBack: false, login: false }
@@ -40,6 +40,8 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  mode: "history",
+  base: process.env.NODE_ENV == "production" ? "/vue/" : '',
   routes
 })
 

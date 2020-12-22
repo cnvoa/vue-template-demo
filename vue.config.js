@@ -30,8 +30,10 @@ const cdn = {
 
 module.exports = {
   productionSourceMap: false,
-  publicPath: './',
+  publicPath: '/vue/', //资源拼接路径
+  outputDir: "dist/vue/", // 打包后输出文件的目录
   assetsDir: "static", //  outputDir的静态资源(js、css、img、fonts)目录
+
   lintOnSave: true, //是否在保存的时候使用 `eslint-loader` 进行检查。
   devServer: {
     open: true,  // npm run serve后自动打开页面
@@ -88,6 +90,33 @@ module.exports = {
       //   vuex: 'Vuex',
       //   axios: 'axios'
       // }
+
+      // 预渲染
+      const PrerenderSPAPlugin = require('prerender-spa-plugin')
+      const Renderer = PrerenderSPAPlugin.PuppeteerRenderer;
+
+      return {
+        plugins: [
+          new PrerenderSPAPlugin({
+            staticDir: path.join(__dirname, 'dist'), // 读取vue-cli已打包文件的根目录 prerender-spa-plugin会在这里开启一个服务
+            outputDir: path.join(__dirname, '/dist/vue/'), //经过prerender-spa-plugin处理的文件最终保存的地方
+            indexPath: path.join(__dirname, 'dist/vue/index.html'), // 指定入口html
+            routes: ['/', '/about'], // 哪些路由页面需要预渲染
+            minify: {
+              minifyCSS: true, // css压缩
+              removeComments: true // 移除注释
+            },
+            renderer: new Renderer({
+              inject: {
+                foo: 'bar'
+              },
+              headless: false,
+              renderAfterDocumentEvent: 'render-event',
+              args: ['--no-sandbox', '--disable-setuid-sandbox']
+            })
+          })
+        ]
+      }
     }
   },
   chainWebpack: config => {
