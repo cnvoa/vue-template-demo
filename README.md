@@ -12,7 +12,7 @@ csdn: <a href="https://blog.csdn.net/joy1793/article/details/110798660" target="
 ### 此 `beforehand` 分支使用 `prerender-spa-plugin` 实现了预渲染功能
 快速查看改动
 - [√ seo 预渲染](#prerend)
-- csdn: <a href="https://blog.csdn.net/joy1793/article/details/110798660" target="_blank">vue-cli-4 移动端脚手架模板vue-template-demo</a>
+- csdn: <a href="https://blog.csdn.net/joy1793/article/details/111554179" target="_blank">vue-cli 4.0 3.0预渲染最新完整版 使用prerender-spa-plugin</a>
 
 ### Node 版本要求
 
