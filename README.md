@@ -7,7 +7,7 @@
 csdn: <a href="https://blog.csdn.net/joy1793/article/details/110798660" target="_blank">vue-cli-4 移动端脚手架模板vue-template-demo</a>
 
 <!-- 查看 [demo](http://test2.huiche51.com/test/vuecli4) 建议手机端查看 -->
-查看 <a href="http://test2.huiche51.com/test/vuecli4" target="_blank">demo 建议手机端查看</a>
+查看 <a href="http://test2.huiche51.com/vue/" target="_blank">`预渲染` demo 建议手机端查看</a>
 
 ### 此 `beforehand` 分支使用 `prerender-spa-plugin` 实现了预渲染功能
 快速查看改动
