@@ -95,16 +95,7 @@ export default {
       ]
     }
   },
-  mounted(){
-    // this.$ttoast({msg: "fuck you"})
-    // this.$lloading.show({tip: "fuck you"})
-    // this.$ddialog({title: "fuck you"})
-    // console.log(this.util.isIOS());
-    // console.log(this.util.testMobileType());
-    console.log(this.util.isCarNum('粤L566V88'));
-    console.log(this.util.isCarNum('Ydajjapisdg'));
-    // console.log(document.documentElement.clientWidth);
-  }
+  mounted(){}
 }
 </script>
 
