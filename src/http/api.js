@@ -19,7 +19,7 @@ const time = () => {
 const trahs = (params) => {
   return apiAxios({
     method: 'get',
-    url: "api/lajifl",
+    url: "api/sjbz?method=1&type=sina",
     params,
     loading: '查询中'
   })
@@ -29,7 +29,7 @@ const slang = () => {
     method: 'post',
     url: 'api/dujitang',
     data: qs.stringify({
-      apiKey: 'f9951161274ac6a4361ccb639f1106b2'
+      apiKey: ''
     })
   })
 }
