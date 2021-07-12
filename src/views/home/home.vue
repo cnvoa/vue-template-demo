@@ -1,7 +1,7 @@
 <template>
   <div class="home pb-50">
     <div class="home-header">
-      <img src="https://s3.ax1x.com/2020/11/19/DuKPSI.gif" alt="">
+      <img src="https://s3.jpg.cm/2021/06/15/IPb544.gif" alt="">
       <h2>vue-cli-4 h5移动端开发模板</h2>
     </div>
     <van-collapse v-model="activeNames" :accordion="true">

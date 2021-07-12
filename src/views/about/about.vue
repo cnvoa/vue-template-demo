@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <div class="logo">
-      <img v-lazy="`${$cdn}/2020/11/19/DuKPSI.gif`" alt="">
+      <img v-lazy="`${$cdn}/2021/06/15/IPb544.gif`" alt="">
       <h2>vue-cli-4 h5开发模板</h2>
       <div class="github">
         <span>项目地址: </span>

@@ -17,7 +17,18 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  routes: [...routes, ...home, ...category, ...about]
+  routes: [...routes, ...home, ...category, ...about],
+  scrollBehavior(to, from, saveTop) {
+    console.log(to);
+    console.log(from);
+    if (saveTop) {
+      return saveTop;
+    } else {
+      if (to.name != from.name && to.meta.scrollToTop) {
+        return { x: 0, y: 0 }
+      }
+    }
+  }
 })
 
 export default router

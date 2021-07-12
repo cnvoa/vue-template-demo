@@ -8,7 +8,8 @@ Vue.use(vuex)
 
 const state = {
   keepAlive: [
-    "Home"
+    "Home",
+    "scrollA"
   ],
   asyncTest: 1, // vuex测试数据 异步
   syncTest: 1, // vuex测试数据 同步

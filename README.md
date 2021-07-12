@@ -1,5 +1,5 @@
 # vue-template-demo
-<div align="center"><img src="https://s3.ax1x.com/2020/11/19/DuKPSI.gif" width="100" /></div>
+<div align="center"><img src="https://img13.360buyimg.com/ddimg/jfs/t1/181324/6/13860/15049/60ec22b1E577f83d7/aa50109c7cb0f485.gif" width="100" /></div>
 
 基于 vue-cli4.0 + webpack 4 + vant ui + sass + rem+vw 适配方案+axios 封装，构建手机端模板脚手架
 

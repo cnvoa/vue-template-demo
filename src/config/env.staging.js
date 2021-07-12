@@ -11,5 +11,5 @@ module.exports = {
   APPSECRET: 'xxx',
   redirect: '',
 
-  $cdn: 'https://s3.ax1x.com' // css cdn图片前缀
+  $cdn: 'https://s3.jpg.cm' // css cdn图片前缀
 }
