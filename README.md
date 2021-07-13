@@ -1156,12 +1156,15 @@ VScode （版本 1.51.1）安装 `eslint` `prettier` `vetur` 插件 `.vue` 文�
 
 扫描添加下方的微信并备注 github 加交流群，交流学习，及时获取代码最新动态。
 
-<p>
-  微信群
-  <img src="https://www.pstldz.com/uploads/zhuoxiang.png" width="256" style="display:block">
-
-  author
-  <img src="https://img11.360buyimg.com/ddimg/jfs/t1/174512/40/19593/49842/60ec28deE8b5259d8/cba591b3f8be23b3.jpg" width="256" style="display:block;">
-</p>
+<div>
+  <span>
+    <img src="https://www.pstldz.com/uploads/zhuoxiang.png" width="256" style="display:block;">
+    <div>微信群</div>
+  </span>
+  <span>
+    <img src="https://img11.360buyimg.com/ddimg/jfs/t1/174512/40/19593/49842/60ec28deE8b5259d8/cba591b3f8be23b3.jpg" width="256" style="display:block;">
+    <div>author</div>
+  </span>
+</div>
  
 如果对你有帮助送我一颗小星星（づ￣3￣）づ╭❤～
