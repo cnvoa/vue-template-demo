@@ -1158,7 +1158,7 @@ VScode （版本 1.51.1）安装 `eslint` `prettier` `vetur` 插件 `.vue` 文�
 
 <p>
   微信群
-  <img src="http://test2.huiche51.com/githubimg/group.jpg" width="256" style="display:block">
+  <img src="https://www.pstldz.com/uploads/zhuoxiang.png" width="256" style="display:block">
 
   author
   <img src="https://img11.360buyimg.com/ddimg/jfs/t1/174512/40/19593/49842/60ec28deE8b5259d8/cba591b3f8be23b3.jpg" width="256" style="display:block;">
