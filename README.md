@@ -9,10 +9,6 @@ csdn: <a href="https://blog.csdn.net/joy1793/article/details/110798660" target="
 <!-- 查看 [demo](http://test2.huiche51.com/test/vuecli4) 建议手机端查看 -->
 查看 <a href="http://test2.huiche51.com/vue/" target="_blank">`预渲染` demo 建议手机端查看</a>
 
-### 此 `beforehand` 分支使用 `prerender-spa-plugin` 实现了预渲染功能
-快速查看改动
-- [√ seo 预渲染](#prerend)
-- csdn: <a href="https://blog.csdn.net/joy1793/article/details/111554179" target="_blank">vue-cli 4.0 3.0预渲染最新完整版 使用prerender-spa-plugin</a>
 
 ### Node 版本要求
 
@@ -20,6 +16,12 @@ csdn: <a href="https://blog.csdn.net/joy1793/article/details/110798660" target="
 [nvm-windows](https://github.com/coreybutler/nvm-windows) 或 [n](https://github.com/tj/n) 在同一台电脑中管理多个 Node 版本。
 
 本示例基于 Node.js 14.15.0
+
+### 各分支内容
+- master 主分支使用纯客户端渲染，代码稳定
+- dev 分支使用纯客户端渲染，会继续完善各项功能
+- beforehand 分支使用预渲染，预渲染几个页面，代码稳定 [快速查看](https://github.com/cnvoa/vue-template-demo/tree/beforehand)
+
 
 ### 启动项目
 
@@ -1256,7 +1258,7 @@ beforehand分支预渲染功能相对于主分支纯前端渲染，以下文件�
 
 [▲ 回顶部](#top)
 
-# 鸣谢 ​
+# 鸣谢​
 
 [vue-h5-template](https://github.com/sunniejs/vue-h5-template)  
 [vue-cli4-config](https://github.com/staven630/vue-cli4-config)  
@@ -1266,9 +1268,15 @@ beforehand分支预渲染功能相对于主分支纯前端渲染，以下文件�
 
 扫描添加下方的微信并备注 github 加交流群，交流学习，及时获取代码最新动态。
 
-<p>
-  <img src="http://test2.huiche51.com/githubimg/group.jpg" width="256" style="display:inline;">
-  <img src="./src/assets/image/mentals.jpg" width="256" style="display:block;">
-</p>
- 
+<div>
+  <div style="display:inline-block;">
+    <img src="https://www.pstldz.com/uploads/zhuoxiang.png" width="256" style="display:block;">
+    <div>微信群</div>
+  </div>
+  <div style="display:inline-block;">
+    <img src="https://img11.360buyimg.com/ddimg/jfs/t1/174512/40/19593/49842/60ec28deE8b5259d8/cba591b3f8be23b3.jpg" width="256" style="display:block;">
+  <div>author</div>
+  </div>
+</div>
+
 如果对你有帮助送我一颗小星星（づ￣3￣）づ╭❤～
