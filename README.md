@@ -1269,14 +1269,14 @@ beforehand分支预渲染功能相对于主分支纯前端渲染，以下文件�
 扫描添加下方的微信并备注 github 加交流群，交流学习，及时获取代码最新动态。
 
 <div>
-  <div style="display:inline-block;">
+  <span>
     <img src="https://www.pstldz.com/uploads/zhuoxiang.png" width="256" style="display:block;">
     <div>微信群</div>
-  </div>
-  <div style="display:inline-block;">
+  </span>
+  <span>
     <img src="https://img11.360buyimg.com/ddimg/jfs/t1/174512/40/19593/49842/60ec28deE8b5259d8/cba591b3f8be23b3.jpg" width="256" style="display:block;">
-  <div>author</div>
-  </div>
+    <div>author</div>
+  </span>
 </div>
 
 如果对你有帮助送我一颗小星星（づ￣3￣）づ╭❤～
