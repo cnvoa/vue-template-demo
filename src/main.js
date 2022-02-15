@@ -15,7 +15,7 @@ import '@/plugins/vant'
 // 导入prototype
 import '@/plugins/prototype'
 // 导入路由守卫
-import '@/guard/router.guard'
+import '@/plugins/router.guard'
 
 window.onscroll = function () {
   //为了保证兼容性，这里取两个值，哪个有值取哪一个
