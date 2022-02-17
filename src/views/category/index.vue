@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import {slang} from "@/http/api";
+import {slang} from "@/plugins/api";
 export default {
   components: {},
   data() {

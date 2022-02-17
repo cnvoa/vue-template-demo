@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import {trahs} from "@/http/api";
+import {trahs} from "@/plugins/api";
 import { mapGetters } from "vuex";
 export default {
   components: {},

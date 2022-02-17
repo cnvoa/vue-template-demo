@@ -1,8 +1,5 @@
 import Vue from 'vue'
 
-import utils from "@/utils/utils"
-Vue.use(utils)
-
 // 公共cdn地址 供js调用
 import { $cdn } from "@/config/index";
 Vue.prototype.$cdn = $cdn
