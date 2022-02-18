@@ -4,9 +4,7 @@ import storage from 't-storage'
 import store from "@/store/";
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-import home from './home' // 可维护多个不同的 子router
-import about from './about' // 可维护多个不同的 子router
-import category from './category' // 可维护多个不同的 子router
+import routes from './routes'
 
 Vue.use(VueRouter)
 
@@ -16,12 +14,8 @@ VueRouter.prototype.push = function push(location) {
   return originalPush.call(this, location).catch(err => err)
 };
 
-const routes = [
-  { path: '*', redirect: "/home" }
-]
-
 const router = new VueRouter({
-  routes: [...routes, ...home, ...category, ...about],
+  routes: [...routes],
   scrollBehavior(to, from, saveTop) {
     console.log(to);
     console.log(from);
