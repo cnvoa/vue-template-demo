@@ -29,7 +29,7 @@ const slang = () => {
     method: 'post',
     url: 'api/dujitang',
     data: qs.stringify({
-      apiKey: ''
+      api_key: '03e90402e747185c'
     })
   })
 }

@@ -38,6 +38,22 @@ export default {
     slang().then((res) => {
       console.log(res);
     })
+    
+    const that = this
+    // 免费的api网站 套了cf, axios请求不了,暂时切换成 jquery
+    // eslint-disable-next-line no-undef
+    $.ajax({
+      url: 'https://api.muxiaoguo.cn/api/dujitang',
+      type: 'get',
+      data: {
+        'api_key': '03e90402e747185c'
+      },
+      success: function (params) {
+        if (params.code == 200) {
+          that.data = params.data
+        }
+      }
+    })
   },
   computed: {
 

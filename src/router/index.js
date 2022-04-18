@@ -15,7 +15,10 @@ VueRouter.prototype.push = function push(location) {
 };
 
 const router = new VueRouter({
-  routes: [...routes],
+  routes: [
+    { path: '*', redirect: "/home" },
+    ...routes
+  ],
   scrollBehavior(to, from, saveTop) {
     console.log(to);
     console.log(from);
@@ -39,36 +42,42 @@ const router = new VueRouter({
  * 守卫登录状态 同时加载 NProgress 插件
  */
 
-
+let RR 
 router.beforeEach((to, from, next) => {
-  // if (/\/login|\/reset/.test(to.path)) next();
+  NProgress.start() //头部加载进度条开始
   
-  // sessionStorage有登录信息 守卫vuex状态
-  let userinfo = storage.session.data('user'); // 获取用户登录信息
-  if (userinfo.loginData) {
-    store.commit("LOGINSTATE", true) // 改变vuex中用户信息状态
-    // store.commit("LOGINDATA", userinfo.loginData)
-    // store.commit("USERINFODATA", userinfo.loginData)
-  } else {
-    if (store.state.loginState) { // 缓存中没有登录状态但是vuex中有登录状态 则刷新当前页面
-      window.location.reload()
-    }
+  if (/\/login|\/reset/.test(to.path)) {
+    next()
+    return
   }
   
-
-  // 守卫需要登录的页面
-  if (to.meta.login) {
-    if (store.state.loginState) {
-      next()
+  if (!RR) {
+    // sessionStorage有登录信息 守卫vuex状态
+    let userinfo = storage.session.data('user'); // 获取用户登录信息
+    if (userinfo.loginData) {
+      RR = userinfo.AA
+      store.commit("LOGINDATA", userinfo.loginData)
+      next({...to})
       return
     } else {
-      store.commit("LOGINPOPUP", !store.state.loginState)
-      return
+      // 没有登录信息的时候 判断push的页面是否需要登录
+      // 守卫需要登录的页面
+      if (to.meta.login) {
+        next("/login")
+        return
+      }else{
+        next()
+        return
+      }
     }
-  }
 
-  NProgress.start() //头部加载进度条开始
-  next()
+  } else if (to.path === '/') {
+    next('/home')
+    return
+  }else {
+    next()
+    return
+  }
 })
 
 router.afterEach(() => {
